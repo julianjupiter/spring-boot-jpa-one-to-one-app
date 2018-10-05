@@ -12,7 +12,7 @@ public class Security {
     private String username;
     @NotBlank(message = "Password is a required field.")
     private String password;
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "employee_id")
     private Employee employee;
 

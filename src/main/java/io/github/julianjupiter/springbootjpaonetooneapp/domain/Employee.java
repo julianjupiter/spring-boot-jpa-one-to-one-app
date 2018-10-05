@@ -14,7 +14,7 @@ public class Employee {
     @NotBlank(message = "Last Name is a required field.")
     private String lastName;
     @Valid
-    @OneToOne(mappedBy = "employee", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "employee")
     private Security security;
 
     public int getId() {
