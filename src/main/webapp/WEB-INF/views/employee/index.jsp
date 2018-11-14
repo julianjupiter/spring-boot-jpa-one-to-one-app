@@ -1,21 +1,10 @@
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-
-<!doctype html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>${pageName}</title>
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/bootstrap.min.css">
-    </head>
-    <body>
+<%@ include file="/WEB-INF/views/includes/header.jsp"%>
         <div class="jumbotron">
             <div class="container">
                 <h1 class="display-4">${pageName}</h1>
+                <a href="${pageContext.request.contextPath}/"><button class="btn btn-primary">Home</button></a>
                 <a href="${pageContext.request.contextPath}/employees/create"><button class="btn btn-primary">New Employee</button></a>
-          </div>
+            </div>
         </div>
         <div class="container">
             <div class="row">
@@ -51,9 +40,4 @@
                 </div>
             </div>
         </div>
-
-        <script src="${pageContext.request.contextPath}/assets/js/jquery.min.js"></script>
-        <script src="${pageContext.request.contextPath}/assets/js/popper.min.js"></script>
-        <script src="${pageContext.request.contextPath}/assets/js/bootstrap.min.js"></script>
-    </body>
-</html>
+<%@ include file="/WEB-INF/views/includes/footer.jsp"%>

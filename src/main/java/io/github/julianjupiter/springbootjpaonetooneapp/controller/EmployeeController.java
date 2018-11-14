@@ -9,22 +9,32 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
-import java.util.Collection;
 
 @Controller
-@RequestMapping("/employees")
 public class EmployeeController {
 
+    private static final String APP_NAME = "Spring Boot Application with JPA One-To-One Relationship";
     @Autowired
     private EmployeeService employeeService;
 
+    @ModelAttribute("appName")
+    public String appName() {
+        return APP_NAME;
+    }
+
     @GetMapping({ "", "/" })
     public String index(Model model, @ModelAttribute("message") String message) {
-        Collection<Employee> employees = employeeService.findAll();
+        model.addAttribute("pageName", "Home");
+
+        return "index";
+    }
+
+    @GetMapping("/employees")
+    public String list(Model model, @ModelAttribute("message") String message) {
+        Iterable<Employee> employees = employeeService.findAll();
 
         model.addAttribute("pageName", "Employees");
         model.addAttribute("employees", employees);
@@ -32,14 +42,14 @@ public class EmployeeController {
         return "employee/index";
     }
 
-    @GetMapping("/create")
+    @GetMapping("/employees/create")
     public String create(Model model, @ModelAttribute("employee") Employee employee) {
         model.addAttribute("pageName", "Employees - Create");
 
         return "employee/create";
     }
 
-    @PostMapping("/create")
+    @PostMapping("/employees/create")
     public String save(Model model, @Valid @ModelAttribute("employee") Employee employee, BindingResult result, RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {
             model.addAttribute("pageName", "Employees - Create");
@@ -48,7 +58,7 @@ public class EmployeeController {
 
         employeeService.save(employee);
 
-        redirectAttributes.addAttribute("message", "Employee has been saved!");
+        redirectAttributes.addFlashAttribute("message", "Employee has been saved!");
 
         return "redirect:/employees";
     }

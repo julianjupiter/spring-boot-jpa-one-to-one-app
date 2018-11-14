@@ -1,6 +1,12 @@
 package io.github.julianjupiter.springbootjpaonetooneapp.domain;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 
@@ -14,7 +20,7 @@ public class Employee {
     @NotBlank(message = "Last Name is a required field.")
     private String lastName;
     @Valid
-    @OneToOne(mappedBy = "employee")
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "employee")
     private Security security;
 
     public int getId() {
@@ -47,5 +53,6 @@ public class Employee {
 
     public void setSecurity(Security security) {
         this.security = security;
+        this.security.setEmployee(this);
     }
 }

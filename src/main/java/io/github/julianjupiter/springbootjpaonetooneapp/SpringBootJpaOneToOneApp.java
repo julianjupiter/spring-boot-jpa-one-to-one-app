@@ -9,4 +9,5 @@ public class SpringBootJpaOneToOneApp {
 	public static void main(String[] args) {
 		SpringApplication.run(SpringBootJpaOneToOneApp.class, args);
 	}
+
 }
